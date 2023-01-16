@@ -22,3 +22,7 @@ class SimpleTokenizer:
         text = text.strip()
         tokens = re.findall(r"\w+|[^\s\w]", text, flags=re.UNICODE)
         return tokens
+    
+
+    def build_vocab(self, texts, max_size=30000, min_freq=1):
+            counter = Counter()
