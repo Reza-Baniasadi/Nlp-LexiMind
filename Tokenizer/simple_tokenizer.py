@@ -16,3 +16,9 @@ class SimpleTokenizer:
         else:
             self.token2id = {}
             self.id2token = {}
+
+
+    def _basic_tokenize(self, text):
+        text = text.strip()
+        tokens = re.findall(r"\w+|[^\s\w]", text, flags=re.UNICODE)
+        return tokens
