@@ -37,3 +37,5 @@ class SimpleTokenizer:
 
     def encode(self, text, add_special=True, max_len=None):
         toks = self._basic_tokenize(text)
+        if add_special:
+            toks = [self.bos_token] + toks + [self.eos_token]
