@@ -39,3 +39,7 @@ class SimpleTokenizer:
         toks = self._basic_tokenize(text)
         if add_special:
             toks = [self.bos_token] + toks + [self.eos_token]
+        ids = [self.token2id.get(t, self.token2id.get(self.unk_token)) for t in toks]
+        if max_len:
+            ids = ids[:max_len]
+        return ids
