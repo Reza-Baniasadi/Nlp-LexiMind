@@ -33,3 +33,7 @@ class SimpleTokenizer:
             token_list = specials + most
             self.token2id = {t:i for i,t in enumerate(token_list)}
             self.id2token = {i:t for t,i in self.token2id.items()}
+
+
+    def encode(self, text, add_special=True, max_len=None):
+        toks = self._basic_tokenize(text)
