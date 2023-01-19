@@ -49,3 +49,7 @@ class SimpleTokenizer:
         text = text.strip()
         tokens = re.findall(r"\w+|[^\s\w]", text, flags=re.UNICODE)
         return tokens
+    
+
+    def decode(self, ids, skip_special=True):
+        toks = [self.id2token.get(i, self.unk_token) for i in ids]
