@@ -55,3 +55,4 @@ class SimpleTokenizer:
         toks = [self.id2token.get(i, self.unk_token) for i in ids]
         if skip_special:
             toks = [t for t in toks if t not in {self.pad_token, self.bos_token, self.eos_token}]
+        return " ".join(toks)
