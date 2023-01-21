@@ -65,3 +65,4 @@ class SimpleTokenizer:
     def load(cls, path):
         with open(path, "r", encoding="utf-8") as f:
             vocab = json.load(f)
+        return cls(vocab=vocab)
