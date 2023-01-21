@@ -56,3 +56,12 @@ class SimpleTokenizer:
         if skip_special:
             toks = [t for t in toks if t not in {self.pad_token, self.bos_token, self.eos_token}]
         return " ".join(toks)
+    
+
+    def save(self, path):
+        with open(path, "w", encoding="utf-8") as f:
+            json.dump(self.token2id, f, ensure_ascii=False, indent=2)
+
+    def load(cls, path):
+        with open(path, "r", encoding="utf-8") as f:
+            vocab = json.load(f)
