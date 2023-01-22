@@ -62,6 +62,7 @@ class SimpleTokenizer:
         with open(path, "w", encoding="utf-8") as f:
             json.dump(self.token2id, f, ensure_ascii=False, indent=2)
 
+    @classmethod
     def load(cls, path):
         with open(path, "r", encoding="utf-8") as f:
             vocab = json.load(f)
