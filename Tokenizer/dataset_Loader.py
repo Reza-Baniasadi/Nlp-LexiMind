@@ -8,4 +8,6 @@ class TextPairDataset(Dataset):
         self.samples = []
         self.tokenizer = tokenizer
         self.max_len = max_len
+        with open(file_path, "r", encoding="utf-8") as f:
+            reader = csv.reader(f, delimiter="\t")
 
