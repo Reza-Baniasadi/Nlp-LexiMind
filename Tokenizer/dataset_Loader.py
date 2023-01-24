@@ -10,4 +10,10 @@ class TextPairDataset(Dataset):
         self.max_len = max_len
         with open(file_path, "r", encoding="utf-8") as f:
             reader = csv.reader(f, delimiter="\t")
+            for row in reader:
+                if len(row) <= max(src_col, tgt_col):
+                    continue
+                src = row[src_col].strip()
+                tgt = row[tgt_col].strip()
+                self.samples.append((src, tgt))
 
