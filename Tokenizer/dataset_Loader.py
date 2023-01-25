@@ -23,3 +23,8 @@ class TextPairDataset(Dataset):
     
     def __getitem__(self, idx):
         src, tgt = self.samples[idx]
+        src_ids = self.tokenizer.encode(src, add_special=True, max_len=self.max_len)
+        tgt_ids = self.tokenizer.encode(tgt, add_special=True, max_len=self.max_len)
+        return {"src_ids": torch.tensor(src_ids, dtype=torch.long),
+                "tgt_ids": torch.tensor(tgt_ids, dtype=torch.long)}
+
