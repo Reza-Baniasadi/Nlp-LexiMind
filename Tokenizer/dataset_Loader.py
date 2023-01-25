@@ -17,6 +17,9 @@ class TextPairDataset(Dataset):
                 tgt = row[tgt_col].strip()
                 self.samples.append((src, tgt))
 
-                
+
     def __len__(self):
         return len(self.samples)
+    
+    def __getitem__(self, idx):
+        src, tgt = self.samples[idx]
