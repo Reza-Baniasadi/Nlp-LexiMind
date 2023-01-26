@@ -32,3 +32,6 @@ class TextPairDataset(Dataset):
         srcs = [item["src_ids"] for item in batch]
         tgts = [item["tgt_ids"] for item in batch]
         src_lens = [len(x) for x in srcs]
+        tgt_lens = [len(x) for x in tgts]
+        max_src = max(src_lens)
+        max_tgt = max(tgt_lens)
