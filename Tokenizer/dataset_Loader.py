@@ -28,3 +28,5 @@ class TextPairDataset(Dataset):
         return {"src_ids": torch.tensor(src_ids, dtype=torch.long),
                 "tgt_ids": torch.tensor(tgt_ids, dtype=torch.long)}
 
+    def collate_batch(batch, pad_id):
+        srcs = [item["src_ids"] for item in batch]
