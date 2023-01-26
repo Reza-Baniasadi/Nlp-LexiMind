@@ -31,3 +31,4 @@ class TextPairDataset(Dataset):
     def collate_batch(batch, pad_id):
         srcs = [item["src_ids"] for item in batch]
         tgts = [item["tgt_ids"] for item in batch]
+        src_lens = [len(x) for x in srcs]
