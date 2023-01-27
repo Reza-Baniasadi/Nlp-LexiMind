@@ -35,3 +35,10 @@ class TextPairDataset(Dataset):
         tgt_lens = [len(x) for x in tgts]
         max_src = max(src_lens)
         max_tgt = max(tgt_lens)
+        src_padded = torch.full((len(batch), max_src), pad_id, dtype=torch.long)
+        tgt_padded = torch.full((len(batch), max_tgt), pad_id, dtype=torch.long)
+        for i, s in enumerate(srcs):
+            src_padded[i, :len(s)] = s
+        for i, t in enumerate(tgts):
+            tgt_padded[i, :len(t)] = t
+        return {"src": src_padded, "tgt": tgt_padded, "src_len": torch.tensor(src_lens), "tgt_len": torch.tensor(tgt_lens)}
