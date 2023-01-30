@@ -12,3 +12,8 @@ class PositionalEncodingSimple(nn.Module):
         pe[:, 0::2] = torch.sin(position * div_term)
         pe[:, 1::2] = torch.cos(position * div_term)
         self.register_buffer('pe', pe.unsqueeze(0))
+
+    def forward(self, x):
+        # x: batch x seq_len x d_model
+        seq_len = x.size(1)
+        return x + self.pe[:, :seq_len, :]
