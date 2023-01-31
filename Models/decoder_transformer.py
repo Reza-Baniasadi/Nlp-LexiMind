@@ -29,3 +29,8 @@ class DecoderOnlyTransformer(nn.Module):
         self.ln = nn.LayerNorm(d_model)
         self.out = nn.Linear(d_model, vocab_size, bias=False)
         self._d_model = d_model
+
+
+    def _generate_square_subsequent_mask(self, sz, device):
+        mask = torch.triu(torch.ones((sz, sz), device=device) * float('-inf'), diagonal=1)
+        return mask
