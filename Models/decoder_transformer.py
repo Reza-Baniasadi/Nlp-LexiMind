@@ -33,3 +33,11 @@ class DecoderOnlyTransformer(nn.Module):
     def _generate_square_subsequent_mask(self, sz, device):
         mask = torch.triu(torch.ones((sz, sz), device=device) * float('-inf'), diagonal=1)
         return mask
+    
+
+    def forward(self, input_ids, memory=None):
+        device = input_ids.device
+        emb = self.tok_emb(input_ids) * math.sqrt(self._d_model)
+        emb = self.pos_enc(emb)
+        seq_len = input_ids.size(1)
+        tgt_mask = self._generate_square_subsequent_mask(seq_len, device)
