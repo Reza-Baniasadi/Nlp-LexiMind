@@ -41,3 +41,10 @@ class DecoderOnlyTransformer(nn.Module):
         emb = self.pos_enc(emb)
         seq_len = input_ids.size(1)
         tgt_mask = self._generate_square_subsequent_mask(seq_len, device)
+        if memory is None:
+            # create a dummy memory: zeros of shape (batch, 1, d_model)
+            memory = emb.new_zeros((input_ids.size(0), 1, self._d_model))
+        hs = self.decoder(tgt=emb, memory=memory, tgt_mask=tgt_mask)
+        out = self.ln(hs)
+        logits = self.out(out)
+        return logits
