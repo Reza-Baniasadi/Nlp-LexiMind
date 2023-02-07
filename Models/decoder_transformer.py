@@ -48,3 +48,18 @@ class DecoderOnlyTransformer(nn.Module):
         out = self.ln(hs)
         logits = self.out(out)
         return logits
+    
+
+
+    def generate(self, input_ids, max_new_tokens=50, eos_id=None):
+        # greedy generation for demo
+        device = input_ids.device
+        for _ in range(max_new_tokens):
+            logits = self.forward(input_ids)  # batch x seq x vocab
+            next_logits = logits[:, -1, :]  # batch x vocab
+            next_ids = torch.argmax(next_logits, dim=-1, keepdim=True)  # batch x 1
+            input_ids = torch.cat([input_ids, next_ids], dim=1)
+            if eos_id is not None:
+                if (next_ids.squeeze(-1) == eos_id).all():
+                    break
+        return input_ids
