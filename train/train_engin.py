@@ -24,3 +24,8 @@ class TrainingEngine:
             self.model.train()
             loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True, collate_fn=collate_fn)
             pbar = tqdm(loader, desc="train")
+            total_loss = 0.0
+            steps = 0
+            for batch in pbar:
+                src = batch["src"].to(self.device)
+                tgt = batch["tgt"].to(self.device)
