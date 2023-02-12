@@ -19,3 +19,8 @@ class TrainingEngine:
         self.criterion = nn.CrossEntropyLoss(ignore_index=pad_id)
         self.ckpt_dir = ckpt_dir
         os.makedirs(ckpt_dir, exist_ok=True)
+
+        def train_one_epoch(self, train_dataset, batch_size=32, grad_clip=None, collate_fn=None):
+            self.model.train()
+            loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True, collate_fn=collate_fn)
+            pbar = tqdm(loader, desc="train")
