@@ -29,3 +29,10 @@ class TrainingEngine:
             for batch in pbar:
                 src = batch["src"].to(self.device)
                 tgt = batch["tgt"].to(self.device)
+                
+            logits = self.model(tgt)
+            logits_flat = logits[:, :-1, :].reshape(-1, logits.size(-1))
+            target_flat = tgt[:, 1:].reshape(-1)
+            loss = self.criterion(logits_flat, target_flat)
+            self.optim.zero_grad()
+            loss.backward()
